@@ -33,9 +33,9 @@ app.use(session({
     collectionName: 'sessions',
   }),
   cookie: {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,         // Must be true for cross-site HTTPS
-    sameSite: 'None'      // Must be None for cross-origin cookies
+    sameSite: 'None',      // Must be None for cross-origin cookies
   },
 }));
 
