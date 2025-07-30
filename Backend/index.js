@@ -13,7 +13,7 @@ const app = express()
 
 // CORS middleware
 app.use(cors({
-  origin: true,
+  origin: 'https://employee-onboard-git-main-prathammanabasannanavars-projects.vercel.app/',
   credentials: true,
   methods: ['GET', 'POST', 'PUT'],
   allowedHeaders: ['Content-Type']
