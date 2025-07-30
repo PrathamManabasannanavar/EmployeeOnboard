@@ -1,0 +1,49 @@
+const db = require('./database')
+const express = require('express')
+// const router = require('./routes.js')
+require('dotenv').config()
+const session = require('express-session')
+const MongoStore = require('connect-mongo');
+const cors = require('cors');
+const userRouter = require('./userRoutes')
+const adminRouter = require('./adminRoutes')
+
+
+const app = express()
+
+// CORS middleware
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT'],
+  allowedHeaders: ['Content-Type']
+}));
+
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
+//for sessions storage
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: 'mongodb://localhost:27017/Employee',
+    collectionName: 'sessions',
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60, // 1 hour
+    httpOnly: true,
+  },
+}));
+
+// app.use('/', router)
+app.use('/user', userRouter)
+
+app.use('/admin', adminRouter)
+
+app.listen(10000, () => {
+  console.log("Started the Server");
+})
+

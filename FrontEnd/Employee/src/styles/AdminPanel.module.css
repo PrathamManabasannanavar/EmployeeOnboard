@@ -1,0 +1,70 @@
+.parent{
+    color: white;
+    font-family: 'Poppins';
+}
+
+.taskSection{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 2px;
+}
+
+.taskSection h3{
+    margin: 10px;
+}
+
+.taskContent{
+    display: flex;
+    flex-direction: column;
+}
+
+.taskBox{
+    background-color: rgb(83, 83, 124);
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.empSection{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 2px;
+}
+
+.empSection h3{
+    margin: 5px;
+}
+
+.empBox{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 20px;
+    background-color: rgb(83, 83, 124);
+    border: 1px solid grey;
+    border-radius: 20px;
+    /* width: fit-content; */
+    cursor: pointer;
+}
+
+.EmpBox{
+    margin-left: 15px;
+}
+
+/* for Employee floating box */
+
+.floatBox{
+    color: black;
+    position: fixed;
+    top: 100px;
+    display: flex;
+    z-index: 99;
+    background-color: azure;
+}
+
+/* .floatFormBox{
+    
+} */

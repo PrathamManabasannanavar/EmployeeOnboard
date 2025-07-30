@@ -1,0 +1,42 @@
+.parent{
+    margin-top: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    background-color: rgb(163, 118, 118);
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.formTag div{
+    padding: 10px;
+    margin: 5px;
+}
+
+.formTag div label{
+    padding: 10px;
+    margin: 1px 10px;
+}
+
+.formTag div input{
+    padding: 5px 7px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.submitBtn{
+    margin-top: 20px;
+    padding: 5px;
+    cursor: pointer;
+}

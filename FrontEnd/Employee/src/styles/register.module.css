@@ -1,0 +1,42 @@
+.parent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Poppin', sans-serif;
+    border: 1px solid black;
+}
+
+.parent div{
+    padding: 10px;
+    /* background-color: rgb(147, 172, 193); */
+    background-color: rgb(91, 91, 134);
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.formBox div{
+    display: flex;
+    flex-direction: column;
+}
+
+.formBox div label{
+    margin: 5px;
+}
+
+.inputText{
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+#button{
+    padding: 4px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#loginText{
+    font-size: smaller;
+    color: white;
+    width: fit-content;
+}

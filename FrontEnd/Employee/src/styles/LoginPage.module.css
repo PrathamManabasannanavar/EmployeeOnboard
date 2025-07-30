@@ -1,0 +1,101 @@
+.parent{
+    height: 80vh;
+    background-image: url('../assets/developer_4661320.png');
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-size: 300px;
+    position: relative;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
+    animation-name: fadeout;
+    animation-duration: 2s;
+    transition-duration: 2s;
+
+    animation-name: backgroundFloat;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.account{
+    display: flex;   
+}
+
+.account div{
+    margin: 5px;
+}
+
+.account div label{
+    margin: 10px;
+    cursor: pointer;
+}
+
+.account div input{
+    cursor: pointer;
+}
+
+
+.main{
+    background-color: rgb(91, 91, 134);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 20px;
+    border: 1px solid blue;
+}
+
+.main label{
+    padding: 5px;
+}
+
+.main div{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 1px;
+}
+
+.main div input{
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.register a{
+    color: white;
+    text-decoration: underline;
+    font-size: x-small;
+    font-weight: bold;
+}
+
+.submitBtn{
+    cursor: pointer;
+}
+
+@keyframes fadeout {
+    from{
+        top: -20px;
+        opacity: 0.2;
+    }
+    to{
+        opacity: 1;
+        top: 0px
+    }
+}
+
+@keyframes backgroundFloat {
+    0%{
+        background-position-y: 20px;
+    }
+    50%{
+        background-position-y: 0;
+    }
+    100%{
+        background-position-y: 20px;
+    }
+}

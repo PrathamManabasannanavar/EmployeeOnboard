@@ -1,0 +1,47 @@
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: black;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.parent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: grey;
+    padding: 3px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;;
+    color: whitesmoke
+}
+
+.componentBox{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.title{
+    padding: 3px 10px;
+}
+
+.items{
+    padding: 5px;
+    color: white;
+    text-decoration: none;
+}
+.items:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
