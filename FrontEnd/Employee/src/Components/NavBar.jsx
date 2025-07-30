@@ -10,7 +10,7 @@ function NavBar(){
 
     const connectBackend = async ()=>{
         try{
-            const response = await fetch('http://localhost:10000/user/session', {
+            const response = await fetch('https://employeeonboard.onrender.com/user/session', {
                 method: 'GET',
                 credentials: 'include',  // Important! This sends the cookies along with the request
                 headers: {
@@ -39,7 +39,7 @@ function NavBar(){
 
     const logoutUser = async ()=>{
         try{
-            const response = await fetch('http://localhost:10000/user/logout', {
+            const response = await fetch('https://employeeonboard.onrender.com/user/logout', {
                 method: 'GET',
                 credentials: 'include',  // Important! This sends the cookies along with the request
                 headers: {

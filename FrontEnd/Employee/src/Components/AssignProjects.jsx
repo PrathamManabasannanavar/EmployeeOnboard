@@ -11,7 +11,7 @@ function AssignProjects() {
     useEffect(() => {
         async function getUsername() {
             try {
-                const response = await fetch('http://localhost:10000/user/username', {
+                const response = await fetch('https://employeeonboard.onrender.com/user/username', {
                     method: 'GET',
                     credentials: 'include', // <- Important! This tells fetch to send cookies
                     headers: {
@@ -42,7 +42,7 @@ function AssignProjects() {
             console.log(operation);
 
             if (operation == "add") {
-                const response = await fetch('http://localhost:10000/admin/assignProject', {
+                const response = await fetch('https://employeeonboard.onrender.com/admin/assignProject', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json' // tells server you're sending JSON
@@ -63,7 +63,7 @@ function AssignProjects() {
                 }
             }
             else{
-                const response = await fetch('http://localhost:10000/admin/removeProject', {
+                const response = await fetch('https://employeeonboard.onrender.com/admin/removeProject', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json' // tells server you're sending JSON

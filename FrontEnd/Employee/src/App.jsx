@@ -3,7 +3,7 @@ import LoginPage from "./Components/LoginPage"
 import NavBar from "./Components/NavBar"
 import SpaceBox from "./Components/SpaceBox"
 import Signup from "./Components/register"
-import DashBoard from "./Components/dashboard"
+import DashBoard from "./Components/Dashboard"
 import AdminPanel from "./Components/AdminPanel"
 import AssignProjects from "./Components/AssignProjects"
 

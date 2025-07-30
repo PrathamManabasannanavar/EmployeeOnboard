@@ -22,7 +22,7 @@ function Signup() {
 
         try{
             console.log("In try inregister");
-            const response = await fetch('http://localhost:10000/user/register', {
+            const response = await fetch('https://employeeonboard.onrender.com/user/register', {
                 method: 'POST',  // Specify that this is a POST request
                 headers: {
                     'Content-Type': 'application/json',  // The body will contain JSON data

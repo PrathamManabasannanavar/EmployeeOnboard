@@ -15,7 +15,7 @@ function LoginPage(){
         // console.log(username);
         // console.log(password);
         try{
-            const response = await fetch(`http://localhost:10000/${user}/login`, {
+            const response = await fetch(`https://employeeonboard.onrender.com/${user}/login`, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'

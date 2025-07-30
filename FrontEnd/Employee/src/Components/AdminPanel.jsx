@@ -15,7 +15,7 @@ function AdminPanel() {
     useEffect(() => {
         async function getUsername() {
             try {
-                const response = await fetch('http://localhost:10000/user/username', {
+                const response = await fetch('https://employeeonboard.onrender.com/user/username', {
                     method: 'GET',
                     credentials: 'include', // <- Important! This tells fetch to send cookies
                     headers: {
@@ -44,7 +44,7 @@ function AdminPanel() {
     useEffect(() => {
 
         async function getEmployees() {
-            const response = await fetch('http://localhost:10000/admin/employees', {
+            const response = await fetch('https://employeeonboard.onrender.com/admin/employees', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
@@ -59,7 +59,7 @@ function AdminPanel() {
 
 
         async function getTasks() {
-            const response = await fetch('http://localhost:10000/admin/tasks', {
+            const response = await fetch('https://employeeonboard.onrender.com/admin/tasks', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
@@ -74,7 +74,7 @@ function AdminPanel() {
 
         //Employee assigned
         async function getEmpAssigned() {
-            const response = await fetch('http://localhost:10000/admin/employeeAssigned', {
+            const response = await fetch('https://employeeonboard.onrender.com/admin/employeeAssigned', {
                 method: 'GET',
                 credentials: 'include',
                 headers: {

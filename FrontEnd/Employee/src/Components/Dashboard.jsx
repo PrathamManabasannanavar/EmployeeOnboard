@@ -11,7 +11,7 @@ function DashBoard() {
     useEffect(() => {
         async function getUsername() {
             try {
-                const response = await fetch('http://localhost:10000/user/username', {
+                const response = await fetch('https://employeeonboard.onrender.com/user/username', {
                     method: 'GET',
                     credentials: 'include', // <- Important! This tells fetch to send cookies
                     headers: {
@@ -96,7 +96,7 @@ function Task() {
 
         if(selectedText != ""){
             try{
-                const response = await fetch('http://localhost:10000/user/updateProgress', {
+                const response = await fetch('https://employeeonboard.onrender.com/user/updateProgress', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -184,7 +184,7 @@ function Task() {
 
 async function getTasks() {
     try {
-        const response = await fetch('http://localhost:10000/user/tasks', {
+        const response = await fetch('https://employeeonboard.onrender.com/user/tasks', {
             method: 'GET',
             credentials: 'include', // <- Important! This tells fetch to send cookies
             headers: {
