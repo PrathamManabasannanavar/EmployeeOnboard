@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes, Link} from "react-router-dom"
+import {HashRouter as Router, Route, Routes, Link} from "react-router-dom"
 import LoginPage from "./Components/LoginPage"
 import NavBar from "./Components/NavBar"
 import SpaceBox from "./Components/SpaceBox"
