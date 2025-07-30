@@ -13,7 +13,7 @@ const app = express()
 
 // CORS middleware
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://employee-onboard-mv6rq2evv-prathammanabasannanavars-projects.vercel.app/',
   credentials: true,
   methods: ['GET', 'POST', 'PUT'],
   allowedHeaders: ['Content-Type']
