@@ -13,7 +13,7 @@ const app = express()
 
 // CORS middleware
 app.use(cors({
-  origin: 'https://employee-onboard-mv6rq2evv-prathammanabasannanavars-projects.vercel.app/',
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT'],
   allowedHeaders: ['Content-Type']
@@ -33,8 +33,9 @@ app.use(session({
     collectionName: 'sessions',
   }),
   cookie: {
-    maxAge: 1000 * 60 * 60, // 1 hour
-    httpOnly: false,
+    httpOnly: true,
+    secure: true,         // Must be true for cross-site HTTPS
+    sameSite: 'None'      // Must be None for cross-origin cookies
   },
 }));
 
