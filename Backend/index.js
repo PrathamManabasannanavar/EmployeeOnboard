@@ -10,6 +10,7 @@ const adminRouter = require('./adminRoutes')
 
 
 const app = express()
+app.set('trust proxy', 1);
 
 // CORS middleware
 app.use(cors({
@@ -18,6 +19,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT'],
   allowedHeaders: ['Content-Type']
 }));
+
 
 
 app.use(express.json())
