@@ -33,7 +33,7 @@ app.use(session({
     collectionName: 'sessions',
   }),
   cookie: {
-    httpOnly: false,
+    httpOnly: true,
     secure: true,         // Must be true for cross-site HTTPS
     sameSite: 'None',      // Must be None for cross-origin cookies
   },
