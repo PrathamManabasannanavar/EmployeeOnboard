@@ -13,5 +13,5 @@ A simple web application for administrators to track employee projects.
 ## Tech Stack
 
 -   **Frontend:** [e.g., HTML, CSS, JavaScript, React]
--   **Backend:** [e.g., Node.js]
+-   **Backend:** [e.g., Node.js, Express]
 -   **Database:** [e.g., MongoDB]
