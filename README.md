@@ -7,6 +7,7 @@ A simple web application for administrators to track employee projects.
 - **Project Status:** View the current status of each project: **Not Started**, **Ongoing**, or **Completed**.
 - **Employee Assignment:** See which projects are assigned to a particular employee.
 - **Project Overview:** Get a quick summary of all projects and their progress.
+- **Notification System:** Notifies the Admin about the Employees approaching the project completion deadline.
 
 
 ## Tech Stack
