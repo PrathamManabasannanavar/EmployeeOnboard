@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const EmpProgress = require('./EmpProgressSchema')
 const EmpLogins = require('./PasswordSchema')
 const TaskSchema = require('./TaskSchema')
-
+require('./adminNotify')
 const router = express.Router()
 
 async function checkLoggedin(req, resp, next){
