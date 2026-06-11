@@ -14,3 +14,7 @@ pnpm-debug.log*
 # Production build output
 dist/
 build/
+
+#custom files
+ML/
+Backend/adminNotify.js
