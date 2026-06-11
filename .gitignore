@@ -1,4 +1,4 @@
-node_modules/
+**/node_modules/
 
 # Local env files (secrets and API keys)
 .env
