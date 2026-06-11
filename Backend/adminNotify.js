@@ -4,7 +4,7 @@ const EmpProgress = require('./EmpProgressSchema')
 const dayjs = require('dayjs')
 require('dotenv').config();
 
-cron.schedule('00 9 * * *', async (req, resp) => {
+cron.schedule('06 12 * * *', async (req, resp) => {
     console.log("inside schedule");
     const today = new Date()
     const users = await EmpProgress.find({dueDate: { $gte: today.getDate() - 2 } })
@@ -50,7 +50,7 @@ function generateUserListHTML(users) {
       <td>${user.username}</td>
       <td>${user.taskId}</td>
       <td>${dayjs(user.dueDate).format('YYYY-MM-DD')}</td>
-      <td style="color: red;">Approaching Deadline</td>
+      <td style="color: red;">Approaching / Approached Deadline</td>
     </tr>
   `).join('');
 
