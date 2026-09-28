@@ -12,10 +12,17 @@ const adminRouter = require('./adminRoutes')
 const app = express()
 app.set('trust proxy', 1);
 
+const allowedOrigins = [
+  'https://employee-onboard.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:5174',
+]
+
 // CORS middleware
 app.use(cors({
-  origin: 'https://employee-onboard.vercel.app',
-  // origin: "http://localhost:5173",
+  origin: (origin, callback) => {
+    callback(null, !origin || allowedOrigins.includes(origin))
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT'],
   allowedHeaders: ['Content-Type']

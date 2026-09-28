@@ -87,7 +87,14 @@ router.post('/login', async (req, resp) => {
     }
 
     req.session.username = username
-    resp.send({ success: true, msg: "session created" })
+    req.session.save((err) => {
+        if (err) {
+            console.error("Error saving login session", err)
+            resp.status(500).send({ success: false, msg: "Could not create session" })
+            return
+        }
+        resp.send({ success: true, msg: "session created" })
+    })
 })
 
 router.get('/logout', (req, resp) => {
