@@ -5,7 +5,7 @@ import { useAuth } from "../useAuth"
 
 function LoginPage(){
     const navigate = useNavigate()
-    const { refreshSession } = useAuth()
+    const { markAuthenticated } = useAuth()
     const [user, setUser] = useState("user");
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -31,11 +31,7 @@ function LoginPage(){
                 setError(data.msg || "Those credentials could not be verified.")
                 return
             }
-            const session = await refreshSession()
-            if (session.loggedIn !== true) {
-                setError("Login succeeded, but the session cookie was not saved. Check the backend CORS and cookie settings.")
-                return
-            }
+            markAuthenticated(user === "admin" ? "admin" : username)
             navigate(user === "admin" ? "/admin" : "/dashboard")
         }
         catch(e){

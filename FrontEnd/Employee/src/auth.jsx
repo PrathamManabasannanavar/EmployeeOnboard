@@ -1,20 +1,26 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { AuthContext } from "./authContext"
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState({ loading: true, loggedIn: false, user: "" })
+  const sessionRequest = useRef(0)
 
   const refreshSession = useCallback(async () => {
+    const requestId = ++sessionRequest.current
     try {
       const response = await fetch("https://employeeonboard.onrender.com/user/session", {
         credentials: "include",
         headers: { "Content-Type": "application/json" },
       })
       const data = await response.json()
-      setSession({ loading: false, loggedIn: data.loggedIn === true, user: data.user || "" })
+      if (requestId === sessionRequest.current) {
+        setSession({ loading: false, loggedIn: data.loggedIn === true, user: data.user || "" })
+      }
       return data
     } catch {
-      setSession({ loading: false, loggedIn: false, user: "" })
+      if (requestId === sessionRequest.current) {
+        setSession({ loading: false, loggedIn: false, user: "" })
+      }
       return { loggedIn: false }
     }
   }, [])
