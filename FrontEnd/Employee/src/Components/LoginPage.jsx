@@ -5,7 +5,7 @@ import { useAuth } from "../useAuth"
 
 function LoginPage(){
     const navigate = useNavigate()
-    const { markAuthenticated } = useAuth()
+    const { refreshSession } = useAuth()
     const [user, setUser] = useState("user");
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -31,7 +31,11 @@ function LoginPage(){
                 setError(data.msg || "Those credentials could not be verified.")
                 return
             }
-            markAuthenticated(user === "admin" ? "admin" : username)
+            const session = await refreshSession()
+            if (session.loggedIn !== true) {
+                setError("The login cookie is stored, but the server did not receive it. Check browser cookie permissions for the backend.")
+                return
+            }
             navigate(user === "admin" ? "/admin" : "/dashboard")
         }
         catch(e){
