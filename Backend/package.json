@@ -20,6 +20,7 @@
     "express-session": "^1.18.2",
     "mongoose": "^8.16.4",
     "node-cron": "^4.2.1",
-    "nodemailer": "^7.0.5"
+    "nodemailer": "^7.0.5",
+    "react-router-dom": "7.18.4"
   }
 }
