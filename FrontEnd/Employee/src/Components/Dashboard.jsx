@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "../styles/DashBoard.module.css"
 import { useAuth } from "../useAuth"
+import { API_BASE } from "../api"
 
 function DashBoard() {
     const { user: username } = useAuth()
@@ -59,7 +60,7 @@ function Task() {
         if (!selectedTask) return
         setIsSaving(true)
         try{
-            const response = await fetch('https://employeeonboard.onrender.com/user/updateProgress', {
+            const response = await fetch(`${API_BASE}/user/updateProgress`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -144,7 +145,7 @@ function Task() {
 
 async function getTasks() {
     try {
-        const response = await fetch('https://employeeonboard.onrender.com/user/tasks', {
+        const response = await fetch(`${API_BASE}/user/tasks`, {
             method: 'GET',
             credentials: 'include', // <- Important! This tells fetch to send cookies
             headers: {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import styles from "../styles/AdminPanel.module.css"
 import { useNavigate } from "react-router-dom"
+import { API_BASE } from "../api"
 
 function AdminPanel() {
 
@@ -15,7 +16,7 @@ function AdminPanel() {
     useEffect(() => {
         async function getUsername() {
             try {
-                const response = await fetch('https://employeeonboard.onrender.com/user/username', {
+                const response = await fetch(`${API_BASE}/user/username`, {
                     method: 'GET',
                     credentials: 'include', // <- Important! This tells fetch to send cookies
                     headers: {
@@ -44,7 +45,7 @@ function AdminPanel() {
     useEffect(() => {
 
         async function getEmployees() {
-            const response = await fetch('https://employeeonboard.onrender.com/admin/employees', {
+            const response = await fetch(`${API_BASE}/admin/employees`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
@@ -59,7 +60,7 @@ function AdminPanel() {
 
 
         async function getTasks() {
-            const response = await fetch('https://employeeonboard.onrender.com/admin/tasks', {
+            const response = await fetch(`${API_BASE}/admin/tasks`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
@@ -74,7 +75,7 @@ function AdminPanel() {
 
         //Employee assigned
         async function getEmpAssigned() {
-            const response = await fetch('https://employeeonboard.onrender.com/admin/employeeAssigned', {
+            const response = await fetch(`${API_BASE}/admin/employeeAssigned`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: {

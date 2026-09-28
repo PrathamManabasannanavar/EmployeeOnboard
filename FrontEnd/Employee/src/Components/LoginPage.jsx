@@ -2,6 +2,7 @@ import { useState } from "react";
 import logincss from "../styles/LoginPage.module.css"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../useAuth"
+import { API_BASE } from "../api"
 
 function LoginPage(){
     const navigate = useNavigate()
@@ -17,7 +18,7 @@ function LoginPage(){
         setError("")
         setIsSubmitting(true)
         try{
-            const response = await fetch(`https://employeeonboard.onrender.com/${user}/login`, {
+            const response = await fetch(`${API_BASE}/${user}/login`, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json'

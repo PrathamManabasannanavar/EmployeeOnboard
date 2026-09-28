@@ -1,6 +1,7 @@
 import navstyle from "../styles/NavBar.module.css"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../useAuth"
+import { API_BASE } from "../api"
 // import devImg from "../assets/developer_4661320.png"
 
 function NavBar(){
@@ -9,7 +10,7 @@ function NavBar(){
 
     const logoutUser = async ()=>{
         try{
-            const response = await fetch('https://employeeonboard.onrender.com/user/logout', {
+            const response = await fetch(`${API_BASE}/user/logout`, {
                 method: 'GET',
                 credentials: 'include',  // Important! This sends the cookies along with the request
                 headers: {

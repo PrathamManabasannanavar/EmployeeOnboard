@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { AuthContext } from "./authContext"
+import { API_BASE } from "./api"
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState({ loading: true, loggedIn: false, user: "" })
@@ -8,7 +9,7 @@ export function AuthProvider({ children }) {
   const refreshSession = useCallback(async () => {
     const requestId = ++sessionRequest.current
     try {
-      const response = await fetch("https://employeeonboard.onrender.com/user/session", {
+      const response = await fetch(`${API_BASE}/user/session`, {
         credentials: "include",
         headers: { "Content-Type": "application/json" },
       })

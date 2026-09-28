@@ -1,6 +1,7 @@
 // import { useState } from "react"
 import styles from "../styles/register.module.css"
 import { Link } from 'react-router-dom'
+import { API_BASE } from "../api"
 
 function Signup() {
     // const [username, setUsername] = useState("")
@@ -21,7 +22,7 @@ function Signup() {
 
         try{
             console.log("In try inregister");
-            const response = await fetch('https://employeeonboard.onrender.com/user/register', {
+            const response = await fetch(`${API_BASE}/user/register`, {
                 method: 'POST',  // Specify that this is a POST request
                 headers: {
                     'Content-Type': 'application/json',  // The body will contain JSON data
