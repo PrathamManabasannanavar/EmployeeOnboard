@@ -14,7 +14,8 @@ app.set('trust proxy', 1);
 
 // CORS middleware
 app.use(cors({
-  origin: 'https://employee-onboard.vercel.app',
+  // origin: 'https://employee-onboard.vercel.app',
+  origin: "*",
   credentials: true,
   methods: ['GET', 'POST', 'PUT'],
   allowedHeaders: ['Content-Type']
