@@ -1,41 +1,9 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from 'react-router-dom';
 import styles from "../styles/DashBoard.module.css"
+import { useAuth } from "../useAuth"
 
 function DashBoard() {
-    const [username, setUsername] = useState("")
-    // const [hideBox, setHideBox] = useState(true)
-
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        async function getUsername() {
-            try {
-                const response = await fetch('https://employeeonboard.onrender.com/user/username', {
-                    method: 'GET',
-                    credentials: 'include', // <- Important! This tells fetch to send cookies
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                })
-
-                const data = await response.json()
-                if (!response.ok || !data.username) {
-                    navigate('/')
-                    return
-                }
-
-                setUsername(data.username)
-            }
-            catch (e) {
-                console.log(e);
-            }
-
-        }
-
-        getUsername()
-
-    }, [])
+    const { user: username } = useAuth()
 
 
     return (
