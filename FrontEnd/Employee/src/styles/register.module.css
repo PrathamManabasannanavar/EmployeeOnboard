@@ -1,42 +1,15 @@
-.parent{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-family: 'Poppin', sans-serif;
-    border: 1px solid black;
-}
+.parent { min-height: calc(100vh - 136px); display: flex; justify-content: center; align-items: center; color: var(--ink); background-color: #eaf3ef; background-image: linear-gradient(135deg, rgba(8, 127, 115, .09) 0%, transparent 42%), linear-gradient(315deg, rgba(229, 109, 85, .10) 0%, transparent 38%), linear-gradient(rgba(255, 255, 255, .32) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .32) 1px, transparent 1px); background-size: auto, auto, 34px 34px, 34px 34px; }
 
-.parent div{
-    padding: 10px;
-    /* background-color: rgb(147, 172, 193); */
-    background-color: rgb(91, 91, 134);
-    margin: 10px;
-    border-radius: 20px;
-}
+.parent > div { width: min(100%, 460px); padding: 34px; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); }
 
-.formBox div{
-    display: flex;
-    flex-direction: column;
-}
+.formBox div { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
 
-.formBox div label{
-    margin: 5px;
-}
+.formBox div label { color: var(--muted); font-size: .84rem; font-weight: 600; }
 
-.inputText{
-    padding: 5px 10px;
-    border-radius: 20px;
-}
+.inputText { padding: 12px 13px; color: var(--ink); background: #fbfdfc; border: 1px solid var(--line); border-radius: 8px; outline: none; }
+.inputText:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(8, 127, 115, .13); }
 
-#button{
-    padding: 4px;
-    border-radius: 20px;
-    cursor: pointer;
-}
+#button { padding: 13px; color: white; background: var(--teal); border: 0; border-radius: 8px; font-weight: 700; cursor: pointer; }
 
-#loginText{
-    font-size: smaller;
-    color: white;
-    width: fit-content;
-}
+#loginText { color: var(--teal); font-size: .84rem; font-weight: 700; width: fit-content; }
+@media (max-width: 500px) { .parent > div { padding: 25px 20px; } }

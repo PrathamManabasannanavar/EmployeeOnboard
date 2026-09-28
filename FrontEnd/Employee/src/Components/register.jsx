@@ -1,6 +1,5 @@
 // import { useState } from "react"
 import styles from "../styles/register.module.css"
-import PropTypes from "prop-types"
 import { Link } from 'react-router-dom'
 
 function Signup() {
@@ -49,7 +48,7 @@ function Signup() {
     return (
         <div className={styles.parent}>
             <div>
-                <form className={styles.formBox}>
+                <form className={styles.formBox} onSubmit={submitUserDetails}>
                     <div>
                         <label htmlFor="">Enter the Username</label>
                         <input type="text" className={styles.inputText} id="username"/>
@@ -71,7 +70,7 @@ function Signup() {
                     </div>
 
                     <div>
-                        <button onClick={()=>submitUserDetails(event)} id={styles.button}>
+                        <button type="submit" id={styles.button}>
                             Submit
                         </button>
                     </div>

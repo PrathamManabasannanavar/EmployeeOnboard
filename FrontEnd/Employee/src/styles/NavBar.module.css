@@ -11,19 +11,7 @@ body {
     margin: 0;
 }
 
-.parent{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: grey;
-    padding: 3px;
-    position: fixed;
-    top: 0;
-    z-index: 100;
-    width: 100%;
-    font-family: 'Poppins', sans-serif;;
-    color: whitesmoke
-}
+.parent { display: flex; justify-content: space-between; align-items: center; min-height: 72px; padding: 0 clamp(18px, 4vw, 64px); background: rgba(255, 255, 255, .94); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 100; color: var(--ink); backdrop-filter: blur(14px); }
 
 .componentBox{
     display: flex;
@@ -32,16 +20,10 @@ body {
     margin-right: 10px;
 }
 
-.title{
-    padding: 3px 10px;
-}
+.title { padding: 3px 0; }
+.title h4 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; letter-spacing: -.03em; }
+.title h4::before { content: '◈'; color: var(--teal); margin-right: 9px; }
 
-.items{
-    padding: 5px;
-    color: white;
-    text-decoration: none;
-}
-.items:hover{
-    text-decoration: underline;
-    cursor: pointer;
-}
+.items { padding: 9px 13px; color: var(--muted); background: transparent; border: 0; text-decoration: none; font-size: .9rem; font-weight: 600; border-radius: 8px; transition: background .2s, color .2s; cursor: pointer; }
+.items:hover { color: var(--teal-dark); background: var(--mint); }
+@media (max-width: 500px) { .parent { min-height: 64px; padding: 0 14px; } .title h4 { font-size: .95rem; } .items { padding: 8px 7px; font-size: .78rem; } }

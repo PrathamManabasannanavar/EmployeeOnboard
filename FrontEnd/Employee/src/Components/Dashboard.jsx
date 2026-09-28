@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom';
 import styles from "../styles/DashBoard.module.css"
 
@@ -20,9 +20,9 @@ function DashBoard() {
                 })
 
                 const data = await response.json()
-                if (!data.username) {
+                if (!response.ok || !data.username) {
                     navigate('/')
-                    alert('User not loggedin')
+                    return
                 }
 
                 setUsername(data.username)
@@ -72,68 +72,60 @@ function DashBoard() {
 
 function Task() {
     const [tasks, setTasks] = useState([])
+    const [taskError, setTaskError] = useState("")
+    const navigate = useNavigate()
 
-    // for floating box
-    const floatingBox = useRef(null)
-    // useEffect(()=>{
-    //     const ele = floatingBox.current
-    //     // ele.innerHTML = "changed"
-    //     console.log(ele);
-    // }, [])
+    const [selectedTask, setSelectedTask] = useState(null)
+    const [selectedProgress, setSelectedProgress] = useState("")
+    const [isSaving, setIsSaving] = useState(false)
 
-    async function displayFloatBox(keyid){
-        floatingBox.current.style.display="block"
-
-        console.log(keyid);
-        
-        const btns = document.getElementsByClassName('radioBtn')
-        let selectedText = ""
-        for(let btn of btns){
-            if(btn.checked){
-                selectedText = btn.value
-            }
-        }
-
-        if(selectedText != ""){
-            try{
-                const response = await fetch('https://employeeonboard.onrender.com/user/updateProgress', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include', //for cookies
-                    body: JSON.stringify({
-                        _id: keyid,
-                        selectedText: selectedText
-                    })
-                })
-
-                const data = await response.json()
-                console.log(data);
-                window.location.reload()
-            }
-            catch(e){
-                console.log(e);
-            }
-        }
+    function displayFloatBox(keyid){
+        const task = tasks.find((item) => item._id === keyid)
+        setSelectedTask(task)
+        setSelectedProgress(task?.progress || "not started")
     }
 
+    async function updateProgress(event){
+        event.preventDefault()
+        if (!selectedTask) return
+        setIsSaving(true)
+        try{
+            const response = await fetch('https://employeeonboard.onrender.com/user/updateProgress', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ _id: selectedTask._id, selectedText: selectedProgress })
+            })
+            const data = await response.json()
+            if (!response.ok || data.success === false) throw new Error(data.msg || "Unable to update progress")
+            setTasks((currentTasks) => currentTasks.map((task) => task._id === selectedTask._id ? { ...task, progress: selectedProgress } : task))
+            setSelectedTask(null)
+        }
+        catch(error){ console.error(error) }
+        finally { setIsSaving(false) }
+    }
 
+    useEffect(() => {
+        getTasks()
+            .then((data) => setTasks(data))
+            .catch((error) => {
+                if (error.message === "UNAUTHORIZED") {
+                    navigate('/', { replace: true })
+                    return
+                }
+                setTaskError("Tasks are temporarily unavailable.")
+                console.error(error)
+            })
+    }, [navigate])
 
-    //start of logic
-    try {
-        useEffect(() => {
-            getTasks()
-                .then((data) => setTasks(data))
-                .catch(err => console.log(err))
-        }, [])
-
-        return (
-            <>
+    return (
+        <>
+            {taskError ? <p>{taskError}</p> : null}
+            {!taskError && tasks.length === 0 ? <p>No tasks assigned yet.</p> : null}
                 {tasks.map((task) => {
                     return (
                         <div key={task._id} className={styles.taskBox} onClick={()=>displayFloatBox(task._id)}>
-                            <ul key={task._id}>
+                            <ul>
                                 <li>
                                     Task Name: {task.task}
                                 </li>
@@ -141,44 +133,43 @@ function Task() {
                                     TaskProgress: {task.progress}
                                 </li>
                                 <li>
-                                    TaskDueDate: {task.dueDate.split('T')[0]}
+                                    TaskDueDate: {task.dueDate ? task.dueDate.split('T')[0] : "Not set"}
                                 </li>
 
                             </ul>
                         </div>
                     )
-                })}
+            })}
 
 
 
 
-                {/* floating box */}
-                <div ref={floatingBox} className={styles.floatBox}>
-                    <form>
-                        <div>
-                            <label htmlFor="">Not Started</label>
-                            <input type="radio" name="progress" value="not started" id="notStarted" className="radioBtn"/>                      
-                        </div>
+                {selectedTask ? (
+                    <div className={styles.dialogBackdrop} onClick={() => setSelectedTask(null)}>
+                        <section className={styles.floatBox} role="dialog" aria-modal="true" aria-labelledby="progress-title" onClick={(event) => event.stopPropagation()}>
+                            <button type="button" className={styles.closeButton} onClick={() => setSelectedTask(null)} aria-label="Close">×</button>
+                            <span className={styles.dialogEyebrow}>Task progress</span>
+                            <h4 id="progress-title">{selectedTask.task}</h4>
+                            <p>Update the status so your team knows where things stand.</p>
+                            <form onSubmit={updateProgress}>
+                                <div className={styles.progressOptions}>
+                                    {["not started", "in progress", "completed"].map((progress) => (
+                                        <label key={progress} className={selectedProgress === progress ? styles.activeProgress : ""}>
+                                            <input type="radio" name="progress" value={progress} checked={selectedProgress === progress} onChange={(event) => setSelectedProgress(event.target.value)} />
+                                            <span>{progress}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                                <button type="submit" className={styles.saveButton} disabled={isSaving}>
+                                    {isSaving ? "Saving..." : "Save status"}
+                                </button>
+                            </form>
+                        </section>
+                    </div>
+                ) : null}
 
-                        <div>
-                            <label htmlFor="">In Progress</label>
-                            <input type="radio" name="progress" value="in progress" id="inProgress" className="radioBtn"/>
-                        </div>
-
-                        <div>
-                            <label htmlFor="">Completed</label>
-                            <input type="radio" name="progress" value="completed" id="completed" className="radioBtn"/>
-                        </div>
-                    </form>
-                </div>
-
-            </>
-        )
-
-    }
-    catch (e) {
-        console.log(e);
-    }
+        </>
+    )
 }
 
 
@@ -193,13 +184,17 @@ async function getTasks() {
             },
         })
 
-        const tasks = await response.json()
-        console.log(tasks);
-        return tasks
+        const data = await response.json()
+        if (response.status === 401 || data?.error === "Login failure") {
+            throw new Error("UNAUTHORIZED")
+        }
+        if (!response.ok || !Array.isArray(data)) {
+            throw new Error("TASKS_UNAVAILABLE")
+        }
+        return data
     }
     catch (e) {
-        console.log(e);
-        return e;
+        throw e
     }
 }
 

@@ -1,19 +1,21 @@
 import { useState } from "react";
 import logincss from "../styles/LoginPage.module.css"
-import {Link, useNavigate} from "react-router-dom"
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../useAuth"
 
 function LoginPage(){
     const navigate = useNavigate()
+    const { markAuthenticated } = useAuth()
     const [user, setUser] = useState("user");
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState("")
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
-    async function submitUserDetails(){
-        const username = document.getElementById('username').value
-        const password = document.getElementById('password').value
-
-        // console.log(username);
-        // console.log(password);
+    async function submitUserDetails(event){
+        event.preventDefault()
+        setError("")
+        setIsSubmitting(true)
         try{
             const response = await fetch(`https://employeeonboard.onrender.com/${user}/login`, {
                 method: 'POST',
@@ -24,62 +26,49 @@ function LoginPage(){
                 body: JSON.stringify({ username: username, password: password })
             });
     
-            const data = await response.json();
-            // const data = response
-            console.log(data);
-
-            if(data.success == true){
-                alert('Logged In')
-
-                if(user == "admin"){
-                    navigate('/admin')
-                    window.location.reload()
-                    return
-                }
-                console.log(data);
-                navigate('/dashboard')
-            }else{
-                alert("Auth failure")
+            const data = await response.json()
+            if(data.success !== true){
+                setError(data.msg || "Those credentials could not be verified.")
+                return
             }
-            
-            window.location.reload()
+            markAuthenticated(user === "admin" ? "admin" : username)
+            navigate(user === "admin" ? "/admin" : "/dashboard")
         }
         catch(e){
-            console.log(e);
+            setError("Unable to connect right now. Please try again.")
+            console.error(e)
         }
+        finally { setIsSubmitting(false) }
     }
 
     return(
         <div className={logincss.parent}>
-            <div className={logincss.account}>
-                <div>
-                    <label htmlFor="user">User</label>
-                    <input type="radio" name="account" id="user" value="user" defaultChecked onClick={()=>setUser("user")}/>
-                </div>
-
-                <div>
-                    <label htmlFor="admin">Admin</label>
-                    <input type="radio" name="account" id="admin" value="admin" onClick={()=>setUser("admin")}/>
-                </div>
-            </div>
             <div className={logincss.main}>
-                <div>
-                    <label htmlFor="">Username</label>
-                    <input type="text" placeholder="Username" id="username"/>
+                <div className={logincss.account} role="group" aria-label="Account type">
+                    <label className={user === "user" ? logincss.selectedAccount : ""} htmlFor="user">
+                        <input type="radio" name="account" id="user" value="user" checked={user === "user"} onChange={()=>setUser("user")}/>
+                        Employee
+                    </label>
+                    <label className={user === "admin" ? logincss.selectedAccount : ""} htmlFor="admin">
+                        <input type="radio" name="account" id="admin" value="admin" checked={user === "admin"} onChange={()=>setUser("admin")}/>
+                        Admin
+                    </label>
                 </div>
-                <div>
-                    <label htmlFor="">Password</label>
-                    <input type="password" placeholder="password" id="password"/>
-                </div>
-                <div>
-                    <input type="submit" placeholder="password" onClick={submitUserDetails} className={logincss.submitBtn}/>
-                </div>
-                {(user == "user") ? (
+                <form onSubmit={submitUserDetails}>
+                    <label htmlFor="username">Username</label>
+                    <input type="text" placeholder="Enter your username" id="username" value={username} onChange={(event)=>setUsername(event.target.value)} autoComplete="username" required />
+                    <label htmlFor="password">Password</label>
+                    <input type="password" placeholder="Enter your password" id="password" value={password} onChange={(event)=>setPassword(event.target.value)} autoComplete="current-password" required />
+                    {error ? <p className={logincss.error} role="alert">{error}</p> : null}
+                    <button type="submit" disabled={isSubmitting} className={logincss.submitBtn}>
+                        {isSubmitting ? "Signing in..." : "Sign in"}
+                    </button>
+                </form>
+                {user === "user" ? (
                     <span className={logincss.register}>
-                        <Link to="/signup">Register</Link>
+                        New here? <Link to="/signup">Create an account</Link>
                     </span>
-                ) : ""
-                }
+                ) : null}
             </div>
         </div>
     )

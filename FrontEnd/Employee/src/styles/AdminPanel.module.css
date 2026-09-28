@@ -1,58 +1,18 @@
-.parent{
-    color: white;
-    font-family: 'Poppins';
-}
+.parent { max-width: 1180px; margin: 0 auto; color: var(--ink); }
 
-.taskSection{
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin: 2px;
-}
+.taskSection, .empSection { padding: 24px; margin-bottom: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 24px rgba(32, 69, 59, .05); }
 
-.taskSection h3{
-    margin: 10px;
-}
+.taskSection h3, .empSection h3 { margin: 0 0 18px; font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; }
 
-.taskContent{
-    display: flex;
-    flex-direction: column;
-}
+.taskContent { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
 
-.taskBox{
-    background-color: rgb(83, 83, 124);
-    padding: 10px;
-    border: 1px solid grey;
-    border-radius: 10px;
-    margin: 10px;
-}
+.taskBox, .empBox { padding: 18px; background: #f3f8f5; border: 1px solid var(--line); border-radius: 10px; }
+.taskBox { line-height: 1.55; }
 
-.empSection{
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin: 2px;
-}
+.empContent { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.empBox { line-height: 1.6; }
 
-.empSection h3{
-    margin: 5px;
-}
-
-.empBox{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    margin: 20px;
-    background-color: rgb(83, 83, 124);
-    border: 1px solid grey;
-    border-radius: 20px;
-    /* width: fit-content; */
-    cursor: pointer;
-}
-
-.EmpBox{
-    margin-left: 15px;
-}
+.EmpBox { margin-top: 12px; padding-top: 12px; color: var(--muted); border-top: 1px solid var(--line); font-size: .9rem; }
 
 /* for Employee floating box */
 
